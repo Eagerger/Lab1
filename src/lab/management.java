@@ -1,6 +1,7 @@
 package lab;
 
-/* @author POP
+/* @author POP 
+ * 多项式赋值化简 求导
 **/
 
 import java.io.*;
@@ -282,11 +283,11 @@ public class management {
 			}
 			else if(countvar == 1) {
 				Splited[i] = Splited[i].replaceAll( String.valueOf(devar), "1");
-//				System.out.println(Splited[i] + "      1");
+
 			}
 			else if(countvar == 2) {
 				Splited[i] = Splited[i].replaceFirst( String.valueOf(devar), "2");
-//				System.out.println(Splited[i] + "      2");
+
 			}
 			else if(countvar >= 3) {
 				Splited[i] = Splited[i].replaceFirst( String.valueOf(devar), String.valueOf(countvar));
