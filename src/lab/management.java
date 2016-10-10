@@ -1,6 +1,6 @@
 package lab;
 
-/* @author POP 
+/* @author POP
  * 多项式赋值化简 求导
 **/
 
@@ -11,6 +11,12 @@ import java.lang.*;
 x*x+2*3+5*y+2
 ! simplify y=3
 !d/d z
+x*x+2*3+5*y+2	x*x+2*3+5*y+2	x*x+2*3+5*y+2	是
+无输入	Nothing Inputed, exiting...	Nothing Inputed, exiting...	是
+x*x+2*3+5*y+2+	x*x+2*3+5*y+2	x*x+2*3+5*y+2	是
+x*x+2*3+5**y+2	Input Error!	Input Error!	是
+xx+11	Input Error!	Input Error!	是
+2x+3	Input Error!	Input Error!	是
 */
 
 
@@ -20,7 +26,7 @@ x*x+2*3+5*y+2
 class data {
 	public char o;
 	public int n;
-	public char v; 
+	public char v;
 	public int type;
 	public void SetValue(char ope, char va, int numb, int typ) {
 		o = ope;
@@ -39,44 +45,44 @@ public class management {
 	static int num = 1;
 	static int var = 2;
 	static int MAXNUM = 5;
-	
+
 	public static boolean isnumber(char ch) {
 		if(ch >= '0' && ch <= '9')
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isop(char ch) {
-		if(ch == '+' || ch == '*') 
+		if(ch == '+' || ch == '*')
 			return true;
 		return false;
 	}
-	
+
 	public static boolean isvar(char ch) {
-		if((ch >= 'a' && ch <= 'z') || (ch >='A' && ch <= 'Z')) 
+		if((ch >= 'a' && ch <= 'z') || (ch >='A' && ch <= 'Z'))
 			return true;
 		return false;
 	}
-	
+
 	public static void printerror() {
 		System.out.println("Input Error!");
 	}
-	
 
-	
-	
+
+
+
 	public static data[] expression(String express) throws IOException {
-		
+
 		int count = 0;
 		data[] 	st;
 		st = new data[30];
-		
+
 		for(int i = 0; i < 30; i++) {
 			st[i] = new data();
 		}
-		
+
 		StringBuffer temp = new StringBuffer("");
-		
+
 		for(int i = 0; i < express.length(); i++) {
 			if(isnumber(express.charAt(i))) {
 				do {
@@ -85,25 +91,25 @@ public class management {
 						break;
 					i++;
 				} while(isnumber(express.charAt(i)));
-				
+
 				String temps = new String(temp.toString());
 				int num1 = Integer.parseInt(temps);
-				
+
 				if(i == express.length() - 1) {
 					st[count].SetValue(' ', ' ', num1, num);
 					temp.delete(0, temp.length());
-					count++;	
+					count++;
 				}
-				
+
 				else if(isop(express.charAt(i))) {
 					st[count].SetValue(' ', ' ', num1, num);
 					temp.delete(0, temp.length());
 					count++;
-					i--;			
+					i--;
 				}
 				else {
 					printerror();
-					return null;	
+					return null;
 				}
 			}
 			else if(isop(express.charAt(i))) {
@@ -136,7 +142,7 @@ public class management {
 				return null;
 			}
 		}
-		
+
 		for (int i = 0; i < express.length(); i++) {
 			switch (st[i].type) {
 				case 1 :
@@ -159,7 +165,7 @@ public class management {
 		for (int i = 0; i < datalength; i++) {
 			if(tobecaled[i].type == op && tobecaled[i].o == '*' && tobecaled[i - 1].type == num && tobecaled[i + 1].type == num) {
 				tobecaled[i - 1].n = tobecaled[i - 1].n * tobecaled[i + 1].n;
-				for(int j = i; j < datalength - 2; j++) 
+				for(int j = i; j < datalength - 2; j++)
 					tobecaled[j] = tobecaled[j + 2];
 				datalength -= 2;
 				i -= 2;
@@ -192,7 +198,7 @@ public class management {
 				datalength -= 2;
 				i -= 2;
 			}
-			
+
 		}
 		for (int i = 0; i < datalength; i++) {
 			switch (tobecaled[i].type) {
@@ -208,23 +214,23 @@ public class management {
 			}
 		}
 		System.out.println();
-//			System.out.println("datatype:" + tobecaled[i].type + "operation:" + tobecaled[i].o + "variable:" + tobecaled[i].v +"number:" + tobecaled[i].n);		
+//			System.out.println("datatype:" + tobecaled[i].type + "operation:" + tobecaled[i].o + "variable:" + tobecaled[i].v +"number:" + tobecaled[i].n);
 		return datalength;
 	}
-	
+
 	public static data[] simplify(String tobesimpled, data[] simple, String express) throws IOException {
 //		System.out.println(express);
 //		for (int i = 0; i < express.length(); i++)
 //			System.out.println("datatype:" + simple[i].type + "operation:" + simple[i].o + "variable:" + simple[i].v +"number:" + simple[i].n);
-		
+
 		StringBuffer vart = new StringBuffer("");
 //		System.out.println(tobesimpled);
 		tobesimpled = tobesimpled.replace(" ","");
 		tobesimpled = tobesimpled.replace("=", "");
 //		System.out.println(tobesimpled);
-			
+
 		for(int i = 0; i < express.length(); i++) {
-			if(simple[i].type == 2) 
+			if(simple[i].type == 2)
 				vart.append(simple[i].v);
 		}
 		String varts = vart.toString();
@@ -242,16 +248,16 @@ public class management {
 				simple = expression(express);
 			}
 		}
-		
+
 //		for (int i = 0; i < express.length(); i++)
 //			System.out.println("datatype:" + simple[i].type + "operation:" + simple[i].o + "variable:" + simple[i].v +"number:" + simple[i].n);
-		
+
 		System.out.println();
 		calculate(simple, express);
 		return simple;
 	}
-	
-	
+
+
 	public static String derivative(String tobeded, data[] deriv, String expression) throws IOException {
 		System.out.println(expression);
 		char devar;
@@ -262,7 +268,7 @@ public class management {
 				System.out.println("Not Found!!!!");
 //				devar = 'x';
 				return null;
-			} 
+			}
 			else if(isvar(tobeded.charAt(i))) {
 //				System.out.println(tobeded.charAt(i));
 				devar = tobeded.charAt(i);
@@ -307,23 +313,23 @@ public class management {
 		System.out.println(expstore);
 		return tobeded;
 	}
-	 
+
 	public static void main(String[] args) throws IOException {
 		try {
 			data[] newexpression = new data[30];
 			for(int i = 0; i < 30; i++) {
 				newexpression[i] = new data();
-			}		
+			}
 			String expressionstore = new String();
 			while (true) {
 			String sentencein;
 			BufferedReader buf;
 			buf=new BufferedReader(new InputStreamReader(System.in));
-			
+
 				sentencein = buf.readLine();
 				sentencein = sentencein.replace(" ","");
 //				System.out.println(sentencein);
-			
+
 				if(isnumber(sentencein.charAt(0)) || isvar(sentencein.charAt(0))) {
 					//expression
 					System.out.println();
@@ -360,5 +366,5 @@ public class management {
 			return;
 		}
 	}
-	
+
 }
