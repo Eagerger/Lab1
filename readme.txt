@@ -1,4 +1,7 @@
-hello world£¡
+<<<<<<< HEAD
+
+
+>>>>>>> C4
 Welcome to Git (version 1.9.5-preview20141217)
 
 
@@ -119,4 +122,8 @@ $ git push origin :test
 Username for 'https://git.oschina.net': giscafer
 Password for 'https://giscafer@git.oschina.net':
 To https://git.oschina.net/giscafer/Comments.git
+<<<<<<< HEAD
  - [deleted]         test
+=======
+ - [deleted]         test
+>>>>>>> C4
